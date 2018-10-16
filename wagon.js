@@ -20,7 +20,6 @@ const requestHandler = (req, res) => {
        collection.find({}).toArray().then(response => {
          console.log(response)
          res.writeHead(200, { 'Content-Type': 'application/json'});
-         // res.write(response.stringify)
          res.end(JSON.stringify(response))
        });
       }).catch(error => console.error(error));
@@ -33,8 +32,6 @@ const requestHandler = (req, res) => {
   } else {
     //passed
   }
-  console.log(req.url)
-  // res.end('HI')
 }
 
 const server = http.createServer(requestHandler)
