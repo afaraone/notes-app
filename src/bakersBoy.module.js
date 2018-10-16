@@ -3,6 +3,10 @@ class bakersBoy {
     this.request = new XMLHttpRequest();
   }
 
+  parseURL(chunks) {
+
+  }
+
   get(url) {
     fetch(url)
     .then((response) => response.json())
