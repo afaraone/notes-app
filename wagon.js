@@ -1,7 +1,6 @@
-let http = require('http')
-let path = require('path')
-let fs = require('fs');
-
+const http = require('http');
+const path = require('path');
+const fs = require('fs');
 
 http.createServer(function(request, response) {
   console.log('request', request.url);
@@ -21,17 +20,18 @@ http.createServer(function(request, response) {
     '.json': 'application/json'
   }
 
-  var contentType = mimeTypes[extname] || 'application/octet-stream';
+  let contentType = mimeTypes[extname] || 'application/octet-stream';
+
+  http.get('http://localhost:4000/test', (res) => {
+    res.writeHead(200, {'Content-type': 'text/plain'});
+    response.write("This is a test!");
+    res.end();
+  })
+
 
   fs.readFile(filePath, function(error, content) {
-
-response.writeHead(200, { 'Content-Type' : contentType });
-response.end(content, 'utf-8');
-
-})
-
-
-
-
+    response.writeHead(200, { 'Content-Type' : contentType });
+    response.end(content, 'utf-8');
+  })
 }).listen(4000);
 console.log('Server running at port 4000')
