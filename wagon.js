@@ -1,11 +1,10 @@
 const http = require('http');
 const path = require('path');
 const fs = require('fs');
-const mongodb = require('mongodb');
+const MongoClient = require('mongodb').MongoClient;
 
 const port = 3000
 
-var dbConn = mongodb.MongoClient.connect('mongodb://localhost:27017/test_notes')
 
 function parseURL(url, ext = '.html') {
   let dottedUrl = '.' + url
@@ -25,15 +24,40 @@ const requestHandler = (req, res) => {
 
   if (req.method === 'GET') {
     console.log("GET");
-    let query = parseQuery(req.url)
-    dbConn.then(function(db) {
-      // let collection = db.collection(query[0])
-      let results = collection.find()
-      res.writeHead(200, {'Content-Type': 'application/json'});
-      res.end(results);
-    })
+    // let query = parseQuery(req.url)
+    const mongo_url = 'mongodb://localhost:27017/'
+    // console.log(req);
+    //
+    // MongoClient.connect(mongo_url, { useNewUrlParser: true }, function(err, db) {
+    //     if (err) { return console.log(err) }
+    //
+    //     const collection = db.collection('users');
+    //     collection.find({},(err,result) => {
+    //         if(err){
+    //             console.log(err);
+    //         }
+    //         console.log(result);
+    //     });
+    // });
+    // MongoClient.connect(mongo_url, function(err, db) {
+    //     if (err) throw err;
+    //     db.collection("users").find({}).toArray(function(err, result) {
+    //         if (err) throw err;
+    //         var query = result;
+    //         db.close();
+    //         res.write(query);
+    //         res.end();
+    //     });
+    // });
 
-
+    MongoClient.connect(mongo_url, { useNewUrlParser: true })
+      .then(client => {
+       const db = client.db('testDatabase');
+       const collection = db.collection('users');
+       collection.find({}).toArray().then(response => {
+         console.log(response)
+       })
+      }).catch(error => console.error(error));
   } else if (req.method === 'POST') {
 
   } else if (req.method === 'PUT') {
@@ -43,8 +67,8 @@ const requestHandler = (req, res) => {
   } else {
     //passed
   }
-  console.log(req.url)
-  res.end('Hello Node.js Server!')
+  // console.log(req.url)
+  // res.end('Hello Node.js Server!')
 }
 
 const server = http.createServer(requestHandler)
