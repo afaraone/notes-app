@@ -1,11 +1,22 @@
 const http = require('http');
 const path = require('path');
 const fs = require('fs');
+const mongodb = require('mongodb');
 
 const port = 3000
 
-function parseURL(url) {
-  
+var dbConn = mongodb.MongoClient.connect('mongodb://localhost:27017/test_notes')
+
+function parseURL(url, ext = '.html') {
+  let dottedUrl = '.' + url
+  if (dottedUrl === './') {
+    dottedUrl += 'index'
+  };
+  return dottedUrl += ext
+}
+
+function parseQuery(url) {
+  return url.split('/')
 }
 
 const requestHandler = (req, res) => {
@@ -14,10 +25,14 @@ const requestHandler = (req, res) => {
 
   if (req.method === 'GET') {
     console.log("GET");
-    // let fileURL = parseURL(req.url)
-    let html = fs.readFileSync('index.html');
-    res.writeHead(200, {'Content-Type': 'text/html'});
-    res.end(html);
+    let query = parseQuery(req.url)
+    dbConn.then(function(db) {
+      // let collection = db.collection(query[0])
+      let results = collection.find()
+      res.writeHead(200, {'Content-Type': 'application/json'});
+      res.end(results);
+    })
+
 
   } else if (req.method === 'POST') {
 
