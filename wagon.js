@@ -2,36 +2,42 @@ const http = require('http');
 const path = require('path');
 const fs = require('fs');
 
-http.createServer(function(request, response) {
-  console.log('request', request.url);
+const port = 3000
 
-  let filePath = '.' + request.url
-  if (filePath == './') {
-    filePath = './index.html'
+function parseURL(url) {
+  
+}
+
+const requestHandler = (req, res) => {
+
+  console.log(req.url);
+
+  if (req.method === 'GET') {
+    console.log("GET");
+    // let fileURL = parseURL(req.url)
+    let html = fs.readFileSync('index.html');
+    res.writeHead(200, {'Content-Type': 'text/html'});
+    res.end(html);
+
+  } else if (req.method === 'POST') {
+
+  } else if (req.method === 'PUT') {
+    //passed
+  } else if (req.method === 'DELETE') {
+    //passed
+  } else {
+    //passed
+  }
+  console.log(req.url)
+  res.end('Hello Node.js Server!')
+}
+
+const server = http.createServer(requestHandler)
+
+server.listen(port, (err) => {
+  if (err) {
+    return console.log('Something bad happened', err)
   }
 
-  let extname = String(path.extname(filePath)).toLowerCase();
-
-
-  let mimeTypes = {
-    '.html': 'text/html',
-    '.js': 'text/javascript',
-    '.css': 'text/css',
-    '.json': 'application/json'
-  }
-
-  let contentType = mimeTypes[extname] || 'application/octet-stream';
-
-  http.get('http://localhost:4000/test', (res) => {
-    res.writeHead(200, {'Content-type': 'text/plain'});
-    response.write("This is a test!");
-    res.end();
-  })
-
-
-  fs.readFile(filePath, function(error, content) {
-    response.writeHead(200, { 'Content-Type' : contentType });
-    response.end(content, 'utf-8');
-  })
-}).listen(4000);
-console.log('Server running at port 4000')
+  console.log(`Server is listening on ${port}`)
+})
