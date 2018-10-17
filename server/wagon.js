@@ -1,9 +1,8 @@
 const http = require('http');
-const mc = require('./server/mongoConnection');
+const mc = require('./mongoConnection');
 const port = 3000;
 
-connection = new mc.mongoConnection('mongodb://localhost:27017/', 'MakersBnB')
-
+connection = new mc.mongoConnection('mongodb://localhost:27017/')
 
 const requestHandler = (req, res) => {
   if (req.url === '/favicon.ico') {
@@ -30,9 +29,10 @@ const requestHandler = (req, res) => {
       connection.put(res, collection, [params, id])
     })
   } else if (req.method === 'DELETE') {
-    //passed
+    connection.delete(res, collection, id)
   } else {
-    //passed
+    response.writeHead(404, { 'Content-Type': 'application/json' });
+    response.end(JSON.stringify(null));
   }
 };
 
