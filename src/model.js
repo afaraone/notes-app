@@ -10,7 +10,6 @@ class Model {
   async loadNotes() {
     try {
       this.notes = await this.bakersBoy.get(ALL_NOTES_URL);
-      console.log(this.notes);
       // this.notes.sort((a, b) => {
       //   if (a.title < b.title) return -1;
       //   if (a.title > b.title) return 1;

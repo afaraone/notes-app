@@ -1,16 +1,17 @@
 class BakersBoy {
   async get(url) {
+    let json;
     await fetch(url, { mode: 'cors' })
       .then(response => response.json())
       .then(function(data) {
-        console.log(data);
-        return data;
+        json = data;
       })
       .catch(error => {
         if (error) {
           console.log('Error!');
         }
       });
+    return json;
   }
 
   async post(url, data = {}) {

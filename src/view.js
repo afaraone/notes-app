@@ -7,11 +7,11 @@ class View {
 
   async renderNotes(notes) {
     let noteElement = this.builder.getElementById('notes');
-    for (let note of notes) {
-      var element = this.builder.createNode('p', note._id);
-      this.builder.addNode(element, 'notes');
-      this.builder.updateText(note._id, 'hello');
-    }
+    // for (let note of notes) {
+    var element = this.builder.createNode('p', notes.id);
+    this.builder.addNode(element, 'notes');
+    this.builder.updateText(notes.id, notes.title);
+    // }
   }
 }
 
