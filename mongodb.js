@@ -6,6 +6,7 @@ const connect = (
   callback,
   dbName = 'MakersBnB',
   dbCollection = 'users'
+
 ) => {
   MongoClient.connect(
     mongoURL,
