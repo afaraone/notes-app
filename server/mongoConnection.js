@@ -11,7 +11,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 class mongoConnection {
   constructor(url) {
-    this.database = process.env.NODE_ENV === 'test' ? 'notes_test' : 'notesr32rf34f';
+    this.database = process.env.NODE_ENV === 'test' ? 'notes_test' : 'notes';
     this.mongoClient = new mongodb.MongoClient(url, {
       useNewUrlParser: true
     });
