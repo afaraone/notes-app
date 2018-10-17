@@ -1,22 +1,18 @@
-import BakeryBuilder from './bakeryBuilder.module'
+import BakeryBuilder from './bakeryBuilder.module.js';
 
 class View {
-
-  contructor(bakeryBuilder = new BakeryBuilder()) {
-    this.builder = bakeryBuilder
+  constructor(bakeryBuilder = new BakeryBuilder()) {
+    this.builder = bakeryBuilder;
   }
 
-  async renderNote(notes) {
+  async renderNotes(notes) {
     let noteElement = this.builder.getElementById('notes');
-    for (let note of notes) {
-      var element = this.builder.createNode("p", note._id)
-      this.builder.addNode(element, "notes")
-      this.builder.updateText(note._id, "hello")
-      
-
-    }
+    // for (let note of notes) {
+    var element = this.builder.createNode('p', notes.id);
+    this.builder.addNode(element, 'notes');
+    this.builder.updateText(notes.id, notes.title);
+    // }
   }
-
 }
 
 export default View;
