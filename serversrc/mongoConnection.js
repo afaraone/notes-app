@@ -1,10 +1,11 @@
 import * as mongodb from 'mongodb'
 
 export class mongoConnection {
-  constructor(url) {
+  constructor(url, mongo = mongodb) {
+    this.mongo = mongo
     this.database = process.env.NODE_ENV === 'test' ? 'notes_test' : 'notes';
-    this.mongoClient = new mongodb.MongoClient(url, { useNewUrlParser: true });
-    this.objectId = mongodb.ObjectId
+    this.mongoClient = new this.mongo.MongoClient(url, { useNewUrlParser: true });
+    this.objectId = this.mongo.ObjectId
   }
 
   connect(response, collectionName, callback, data) {

@@ -53,6 +53,7 @@ class mongoConnection {
   }
 
   post(response, collectionName, data) {
+    encryptPassword(data)
     this.connect(response, collectionName, this.postCallback, data);
   }
 
