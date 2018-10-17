@@ -4,8 +4,8 @@ const MongoClient = require('mongodb').MongoClient;
 const connect = (
   res,
   callback,
-  dbName = 'test-notes',
-  dbCollection = 'notes'
+  dbName = 'MakersBnB',
+  dbCollection = 'users'
 ) => {
   MongoClient.connect(
     mongoURL,
