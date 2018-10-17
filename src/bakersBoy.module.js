@@ -1,4 +1,4 @@
-class bakersBoy {
+class BakersBoy {
   constructor() {
     this.request = new XMLHttpRequest();
   }

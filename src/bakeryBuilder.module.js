@@ -1,4 +1,4 @@
-class bakeryBuilder {
+class BakeryBuilder {
   constructor() {
     this.request = new XMLHttpRequest();
   }
@@ -10,12 +10,12 @@ class bakeryBuilder {
   }
 
   addNode(node, afterID) {
-    let afterNode = document.getElementById(afterID)
+    let afterNode = this.getElementById(afterID)
     afterNode.appendChild(node)
   }
 
   updateText(id, value) {
-    let element = document.getElementById(id)
+    let element = this.getElementById(id)
     if (element === null) {
       throw new Error('No element with that id')
     } else {
@@ -24,10 +24,17 @@ class bakeryBuilder {
   }
 
   getText(id) {
-    return document.getElementById(id).innerHTML
+    return this.getElementById(id).innerHTML
   }
 
   updateClick(id, func) {
-    document.getElementById(id).onclick = func
+    this.getElementById(id).onclick = func
   }
+
+  getElementById(id) {
+    return document.getElementById(id)
+  }
+
+
+
 }
