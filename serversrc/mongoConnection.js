@@ -1,8 +1,8 @@
 import * as mongodb from 'mongodb'
 
 export class mongoConnection {
-  constructor(url, database) {
-    this.database = database;
+  constructor(url) {
+    this.database = process.env.NODE_ENV === 'test' ? 'notes_test' : 'notes';
     this.mongoClient = new mongodb.MongoClient(url, { useNewUrlParser: true });
     this.objectId = mongodb.ObjectId
   }
@@ -31,29 +31,48 @@ export class mongoConnection {
     this.connect(response, collectionName, this.readCallback, data)
   }
 
+  postCallback(response, collection, data) {
+    collection
+      .insertOne(data, (error, results) => {
+        if (error) throw error;
+        console.log("1 entry added")
+        response.writeHead(201, { 'Content-Type': 'application/json' });
+        response.end(JSON.stringify(results));
+      })
+  }
+
   post(response, collectionName, data) {
     this.connect(response, collectionName, this.postCallback, data)
   }
 
-  postCallback(response, collection, data) {
-    collection
-      .insertOne(data, (err, res) => {
-        if (err) throw err;
-        console.log("1 name added")
-      })
-  }
-
   putCallback(response, collection, data) {
     collection
-      .updateOne(data[1], {$set: data[0]}, (err, res) => {
-        if (err) throw err;
-        console.log("1 name added")
+      .updateOne(data[1], {$set: data[0]}, (error, results) => {
+        if (error) throw error;
+        console.log("1 entry updated")
+        response.writeHead(204, { 'Content-Type': 'application/json' });
+        response.end(JSON.stringify(results));
       })
   }
 
   put(response, collectionName, data) {
     data[1] = { _id: new this.objectId(data[1]) }
-    console.log(data)
     this.connect(response, collectionName, this.putCallback, data)
+  }
+
+  deleteCallback(response, collection, data) {
+    collection
+      .deleteOne(data, (error, results) => {
+        if (error) throw error;
+        console.log("1 entry deleted")
+        response.writeHead(204, { 'Content-Type': 'application/json' });
+        response.end(JSON.stringify(results));
+      })
+  }
+
+  delete(response, collectionName, data) {
+    data = { _id: new this.objectId(data) }
+    console.log(data)
+    this.connect(response, collectionName, this.deleteCallback, data)
   }
 }
