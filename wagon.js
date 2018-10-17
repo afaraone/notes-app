@@ -9,17 +9,26 @@ const requestHandler = (req, res) => {
   if (req.url === '/favicon.ico') {
     return
   }
+  collection = req.url.split('/')[1]
+  id = req.url.split('/')[2]
+
+  let data = []
+  req.on('data', chunk => {
+    data.push(chunk)
+  })
 
   if (req.method === 'GET') {
-    // collection = req.url.split('/')[1]
-    // id = req.url.split('/')[2]
-    // data = id == null ? { _id: 'this is called twice' } : { _id: id }
-    // data = {}
-    connection.read(res, 'users', {});
+    connection.read(res, collection, id);
   } else if (req.method === 'POST') {
-    //passed
+    req.on('end', () => {
+      let params = JSON.parse(data)
+      connection.post(res, collection, params)
+    })
   } else if (req.method === 'PUT') {
-    //passed
+    req.on('end', () => {
+      let params = JSON.parse(data)
+      connection.put(res, collection, [params, id])
+    })
   } else if (req.method === 'DELETE') {
     //passed
   } else {

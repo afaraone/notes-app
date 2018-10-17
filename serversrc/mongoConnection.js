@@ -4,7 +4,7 @@ export class mongoConnection {
   constructor(url, database) {
     this.database = database;
     this.mongoClient = new mongodb.MongoClient(url, { useNewUrlParser: true });
-    this.timesCalled = 0;
+    this.objectId = mongodb.ObjectId
   }
 
   connect(response, collectionName, callback, data) {
@@ -21,15 +21,39 @@ export class mongoConnection {
       .find(data)
       .toArray()
       .then( results => {
-        // console.log(results)
         response.writeHead(200, { 'Content-Type': 'application/json' });
         response.end(JSON.stringify(results));
     })
   }
 
-  read(response, collectionName, data) {
+  read(response, collectionName, id) {
+    let data = (id == null || id === "") ? { } : { _id: new this.objectId(id) }
     this.connect(response, collectionName, this.readCallback, data)
-    this.timesCalled += 1;
-    console.log(this.timesCalled)
+  }
+
+  post(response, collectionName, data) {
+    this.connect(response, collectionName, this.postCallback, data)
+  }
+
+  postCallback(response, collection, data) {
+    collection
+      .insertOne(data, (err, res) => {
+        if (err) throw err;
+        console.log("1 name added")
+      })
+  }
+
+  putCallback(response, collection, data) {
+    collection
+      .updateOne(data[1], {$set: data[0]}, (err, res) => {
+        if (err) throw err;
+        console.log("1 name added")
+      })
+  }
+
+  put(response, collectionName, data) {
+    data[1] = { _id: new this.objectId(data[1]) }
+    console.log(data)
+    this.connect(response, collectionName, this.putCallback, data)
   }
 }
