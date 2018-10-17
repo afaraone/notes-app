@@ -4,8 +4,8 @@
   "description": "A note-taking app with an external API",
   "main": "index.js",
   "scripts": {
-    "babel": "./node_modules/.bin/babel serversrc --out-dir server"
-    "test": "npm run babel && node tests",
+    "babel": "./node_modules/.bin/babel serversrc --out-dir server",
+    "test": "npm run babel && node tests"
   },
   "repository": {
     "type": "git",

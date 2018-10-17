@@ -5,7 +5,7 @@ class Controller {
   }
   async initialise() {
     await this.model.loadNotes();
-    this.view.renderNotes(this.model.notes);
+    await this.view.renderNotes(this.model.notes);
   }
 }
 

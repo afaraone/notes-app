@@ -10,11 +10,12 @@ class Model {
   async loadNotes() {
     try {
       this.notes = await this.bakersBoy.get(ALL_NOTES_URL);
-      this.notes.sort((a, b) => {
-        if (a.title < b.title) return -1;
-        if (a.title > b.title) return 1;
-        return 0;
-      });
+      console.log(this.notes);
+      // this.notes.sort((a, b) => {
+      //   if (a.title < b.title) return -1;
+      //   if (a.title > b.title) return 1;
+      //   return 0;
+      // });
     } catch (error) {
       console.log(error.message);
     }

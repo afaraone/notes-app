@@ -1,9 +1,10 @@
 class BakersBoy {
-  get(url) {
-    fetch(url, { mode: 'cors' })
+  async get(url) {
+    await fetch(url, { mode: 'cors' })
       .then(response => response.json())
       .then(function(data) {
         console.log(data);
+        return data;
       })
       .catch(error => {
         if (error) {
@@ -12,8 +13,8 @@ class BakersBoy {
       });
   }
 
-  post(url, data = {}) {
-    fetch(url, {
+  async post(url, data = {}) {
+    await fetch(url, {
       method: 'POST',
       body: JSON.stringify(data),
       mode: 'cors',
@@ -30,8 +31,8 @@ class BakersBoy {
       });
   }
 
-  patch(url, data) {
-    fetch(url, {
+  async patch(url, data) {
+    await fetch(url, {
       method: 'PUT',
       body: JSON.stringify(data),
       headers: {
@@ -42,8 +43,8 @@ class BakersBoy {
       .then(json => console.log(json));
   }
 
-  delete(url) {
-    fetch(url, {
+  async delete(url) {
+    await fetch(url, {
       method: 'DELETE'
     });
   }

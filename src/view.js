@@ -1,11 +1,11 @@
 import BakeryBuilder from './bakeryBuilder.module.js';
 
 class View {
-  contructor() {
-    this.builder = new BakeryBuilder();
+  constructor(bakeryBuilder = new BakeryBuilder()) {
+    this.builder = bakeryBuilder;
   }
 
-  renderNotes(notes) {
+  async renderNotes(notes) {
     let noteElement = this.builder.getElementById('notes');
     for (let note of notes) {
       var element = this.builder.createNode('p', note._id);
