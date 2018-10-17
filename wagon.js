@@ -1,14 +1,34 @@
 const http = require('http');
-const mongodb = require('./mongodb.js');
+const mc = require('./server/mongoConnection');
 const port = 3000;
 
+connection = new mc.mongoConnection('mongodb://localhost:27017/', 'MakersBnB')
+
+
 const requestHandler = (req, res) => {
+  if (req.url === '/favicon.ico') {
+    return
+  }
+  collection = req.url.split('/')[1]
+  id = req.url.split('/')[2]
+
+  let data = []
+  req.on('data', chunk => {
+    data.push(chunk)
+  })
+
   if (req.method === 'GET') {
-    mongodb.getNotes(res);
+    connection.read(res, collection, id);
   } else if (req.method === 'POST') {
-    //passed
+    req.on('end', () => {
+      let params = JSON.parse(data)
+      connection.post(res, collection, params)
+    })
   } else if (req.method === 'PUT') {
-    //passed
+    req.on('end', () => {
+      let params = JSON.parse(data)
+      connection.put(res, collection, [params, id])
+    })
   } else if (req.method === 'DELETE') {
     //passed
   } else {

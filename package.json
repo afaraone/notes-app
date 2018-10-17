@@ -4,8 +4,8 @@
   "description": "A note-taking app with an external API",
   "main": "index.js",
   "scripts": {
+    "babel": "./node_modules/.bin/babel serversrc --out-dir server"
     "test": "npm run babel && node tests",
-    "babel": "./node_modules/.bin/babel src --out-dir lib"
   },
   "repository": {
     "type": "git",
@@ -20,13 +20,13 @@
   "devDependencies": {
     "@babel/cli": "^7.1.2",
     "@babel/core": "^7.1.2",
+    "@babel/plugin-transform-new-target": "^7.0.0",
+    "@babel/polyfill": "^7.0.0",
     "@babel/preset-env": "^7.1.0",
     "fs": "0.0.1-security",
     "http": "0.0.0",
     "mongodb": "^3.1.8",
     "path": "^0.12.7"
   },
-  "dependencies": {
-    "@babel/polyfill": "^7.0.0"
-  }
+  "dependencies": {}
 }

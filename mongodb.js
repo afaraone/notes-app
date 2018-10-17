@@ -4,8 +4,9 @@ const MongoClient = require('mongodb').MongoClient;
 const connect = (
   res,
   callback,
-  dbName = 'test-notes',
-  dbCollection = 'notes'
+  dbName = 'MakersBnB',
+  dbCollection = 'users'
+
 ) => {
   MongoClient.connect(
     mongoURL,
@@ -19,9 +20,9 @@ const connect = (
     .catch(error => console.error(error));
 };
 
-const getNotesFromCollection = (res, collection) => {
+const getNotesFromCollection = (res, collection, data = {}) => {
   collection
-    .find({})
+    .find(data)
     .toArray()
     .then(response => {
       //console.log(response);
