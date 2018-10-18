@@ -1,5 +1,5 @@
 // const ALL_NOTES_URL = 'http://localhost:3000';
-const ALL_NOTES_URL = 'https://jsonplaceholder.typicode.com/todos/1';
+const ALL_NOTES_URL = 'https://jsonplaceholder.typicode.com/todos';
 
 class Model {
   constructor(bakersBoy) {

@@ -1,0 +1,51 @@
+
+body {
+    background-color: DarkSlateGray  ;
+}
+
+#header {
+    color: BurlyWood;
+    font: 30px courier;
+    border-bottom: 5px solid BurlyWood;
+    margin-left: 450;
+    margin-right: 450;
+
+}
+
+p {
+  background-color: #4D5656;
+    color: #AAB7B8;
+    font: 25px courier;
+    margin-left: 450;
+    margin-right: 450;
+    margin-top: 3;
+    margin-bottom: 5;
+    border: 0.1px solid BurlyWood;
+    padding: 5px;
+
+}
+
+
+
+.button {
+  background-color:  #4D5656; /* Green */
+  border: none;
+  color: BurlyWood;
+  padding: 18px 50px;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+  font: 25px courier;
+}
+
+.notebox {
+  background-color: #AAB7B8;
+  border: none;
+  color: #4D5656;
+  padding: 18px 50px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  font: 25px courier;
+}

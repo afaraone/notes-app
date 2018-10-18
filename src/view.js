@@ -7,11 +7,14 @@ class View {
 
   async renderNotes(notes) {
     let noteElement = this.builder.getElementById('view-note-span');
-    // for (let note of notes) {
-    var element = this.builder.createNode('p', notes.id);
+    let counter = 0
+    for (let note of notes) {
+    var element = this.builder.createNode('p', note.id);
     this.builder.addNode(element, 'view-note-span');
-    this.builder.updateText(notes.id, notes.title);
-    // }
+    this.builder.updateText(note.id, note.title.substring(1, 20));
+    counter ++
+    if (counter > 7) break
+    }
   }
 }
 
