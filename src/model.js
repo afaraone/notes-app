@@ -1,5 +1,5 @@
-// const ALL_NOTES_URL = 'http://localhost:3000';
-const ALL_NOTES_URL = 'https://jsonplaceholder.typicode.com/todos/1';
+// const ALL_NOTES_URL = 'http://fa167122.ngrok.io/notes';
+const ALL_NOTES_URL = 'https://jsonplaceholder.typicode.com/todos';
 
 class Model {
   constructor(bakersBoy) {
@@ -20,7 +20,7 @@ class Model {
     }
   }
   createNote(noteText) {
-    console.log('Model button clicked with ' + noteText)
+    this.bakersBoy.post(ALL_NOTES_URL, {title: noteText})
   }
 }
 

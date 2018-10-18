@@ -30,6 +30,9 @@ class BakeryBuilder {
     }
     // .onclick = func;
 
+  createNewButton(id, func) {
+    this.getElementById(id).addEventListener = func;
+  }
 
   getElementById(id) {
     return document.getElementById(id);
