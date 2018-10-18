@@ -9,7 +9,6 @@ body {
     border-bottom: 5px solid BurlyWood;
     margin-left: 450;
     margin-right: 450;
-
 }
 
 p {
@@ -18,14 +17,11 @@ p {
     font: 25px courier;
     margin-left: 450;
     margin-right: 450;
-    margin-top: 3;
+    margin-top: 10;
     margin-bottom: 5;
     border: 0.1px solid BurlyWood;
     padding: 5px;
-
 }
-
-
 
 .button {
   background-color:  #4D5656; /* Green */

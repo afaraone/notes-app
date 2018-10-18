@@ -11,8 +11,12 @@ class View {
     for (let note of notes) {
     var element = this.builder.createNode('p', note.id);
     this.builder.addNode(element, 'view-note-span');
-    this.builder.updateText(note.id, note.title.substring(1, 20));
+    this.builder.updateText(note.id, note.title.substring(0, 20));
     counter ++
+    this.builder.updateClick(note.id, () => {
+      this.builder.updateText(note.id, note.title)
+    })
+
     if (counter > 7) break
     }
   }
