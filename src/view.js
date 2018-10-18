@@ -13,6 +13,23 @@ class View {
     this.builder.updateText(notes.id, notes.title);
     // }
   }
+
+  bind(event, cb) {
+    let self = this
+    if (event === 'createButtonClick') {
+      this.builder.updateClick('create-note-btn', function() {
+        self.createNoteClicked(cb);
+      })
+    }
+  }
+  createNoteClicked(cb) {
+    console.log('Button clicked.')
+    var test = this.builder.getText('create-note-text')
+    console.log(test)
+    cb(test)
+  }
 }
+
+
 
 export default View;

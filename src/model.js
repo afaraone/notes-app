@@ -19,6 +19,9 @@ class Model {
       console.log(error.message);
     }
   }
+  createNote(noteText) {
+    console.log('Model button clicked with ' + noteText)
+  }
 }
 
 export default Model;

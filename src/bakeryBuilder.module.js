@@ -22,12 +22,14 @@ class BakeryBuilder {
   }
 
   getText(id) {
-    return this.getElementById(id).innerHTML;
+    return this.getElementById(id).value;
   }
 
   updateClick(id, func) {
-    this.getElementById(id).onclick = func;
-  }
+    this.getElementById(id).addEventListener('click', func)
+    }
+    // .onclick = func;
+
 
   getElementById(id) {
     return document.getElementById(id);
