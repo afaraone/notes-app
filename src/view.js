@@ -8,9 +8,9 @@ class View {
   async renderNotes(notes) {
     let noteElement = this.builder.getElementById('view-note-span');
     for (let note of notes) {
-    var element = this.builder.createNode('p', note.id);
-    this.builder.addNode(element, 'view-note-span');
-    this.builder.updateText(note.id, note.title);
+      var element = this.builder.createNode('p', note._id);
+      this.builder.addNode(element, 'view-note-span');
+      this.builder.updateText(note._id, note.title);
     }
   }
 
