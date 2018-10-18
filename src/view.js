@@ -6,10 +6,10 @@ class View {
   }
 
   async renderNotes(notes) {
-    let noteElement = this.builder.getElementById('notes');
+    let noteElement = this.builder.getElementById('view-note-span');
     // for (let note of notes) {
     var element = this.builder.createNode('p', notes.id);
-    this.builder.addNode(element, 'notes');
+    this.builder.addNode(element, 'view-note-span');
     this.builder.updateText(notes.id, notes.title);
     // }
   }
