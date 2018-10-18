@@ -18,11 +18,19 @@ export class mongoConnection {
   }
 
   readCallback(response, collection, data) {
+    console.log(collection, data)
     collection
       .find(data)
       .toArray()
       .then( results => {
-        response.writeHead(200, { 'Content-Type': 'application/json' });
+        response.writeHead(200, {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'OPTIONS, POST, GET, PUT, DELETE',
+          'Access-Control-Allow-Headers': '*',
+          'Access-Control-Max-Age': 2592000
+        });
+        console.log(results)
         response.end(JSON.stringify(results));
     })
   }
@@ -37,7 +45,12 @@ export class mongoConnection {
       .insertOne(data, (error, results) => {
         if (error) throw error;
         console.log("1 entry added")
-        response.writeHead(201, { 'Content-Type': 'application/json' });
+        response.writeHead(201, { 'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'OPTIONS, POST, GET, PUT, DELETE',
+          'Access-Control-Allow-Headers': '*',
+          'Access-Control-Max-Age': 2592000,
+          'Content-Type': 'application/json'
+        });
         response.end(JSON.stringify(results));
       })
   }
@@ -51,7 +64,12 @@ export class mongoConnection {
       .updateOne(data[1], {$set: data[0]}, (error, results) => {
         if (error) throw error;
         console.log("1 entry updated")
-        response.writeHead(204, { 'Content-Type': 'application/json' });
+        response.writeHead(204, { 'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'OPTIONS, POST, GET, PUT, DELETE',
+          'Access-Control-Allow-Headers': '*',
+          'Access-Control-Max-Age': 2592000,
+          'Content-Type': 'application/json'
+        });
         response.end(JSON.stringify(results));
       })
   }
@@ -66,7 +84,12 @@ export class mongoConnection {
       .deleteOne(data, (error, results) => {
         if (error) throw error;
         console.log("1 entry deleted")
-        response.writeHead(204, { 'Content-Type': 'application/json' });
+        response.writeHead(204, { 'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'OPTIONS, POST, GET, PUT, DELETE',
+          'Access-Control-Allow-Headers': '*',
+          'Access-Control-Max-Age': 2592000,
+          'Content-Type': 'application/json'
+        });
         response.end(JSON.stringify(results));
       })
   }

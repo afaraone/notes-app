@@ -29,6 +29,10 @@ class BakeryBuilder {
     this.getElementById(id).onclick = func;
   }
 
+  setClickState(id, bool=false) {
+    document.getElementById(id).setAttribute('clicked', bool);
+  }
+
   getElementById(id) {
     return document.getElementById(id);
   }

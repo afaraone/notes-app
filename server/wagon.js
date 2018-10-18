@@ -1,10 +1,11 @@
 const http = require('http');
 const mc = require('./mongoConnection');
-const port = 3000;
+const port = 3050;
 
 connection = new mc.mongoConnection('mongodb://localhost:27017/')
 
 const requestHandler = (req, res) => {
+
   if (req.url === '/favicon.ico') {
     return
   }
