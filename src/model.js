@@ -1,4 +1,4 @@
-const ALL_NOTES_URL = 'http://0aefe77b.ngrok.io/notes';
+const ALL_NOTES_URL = 'http://f012cee7.ngrok.io';
 // const ALL_NOTES_URL = 'https://jsonplaceholder.typicode.com/todos';
 
 class Model {
@@ -20,7 +20,7 @@ class Model {
     }
   }
   createNote(noteText) {
-    this.bakersBoy.post(ALL_NOTES_URL, {title: noteText})
+    this.bakersBoy.post(ALL_NOTES_URL, { title: noteText });
   }
 }
 
