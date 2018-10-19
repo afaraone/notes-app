@@ -2,7 +2,7 @@ class Controller {
   constructor(model, view) {
     this.model = model;
     this.view = view;
-    this.view.bind('createButtonClick', this.createButtonClicked.bind(this))
+    this.view.bind('createButtonClick', this.createButtonClicked.bind(this));
   }
   async initialise() {
     await this.model.loadNotes();
@@ -13,7 +13,7 @@ class Controller {
     this.view.bind('nicsButtonAdd', this.nicsButtonClicked.bind(this))
   }
   createButtonClicked(noteText) {
-    console.log('Controller button clicked')
+    console.log('Controller button clicked');
     this.model.createNote(noteText);
     setTimeout(() => {
       this.clearBox();
