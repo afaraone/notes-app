@@ -1,8 +1,11 @@
 class BakeryBuilder {
-  createNode(type, id = null) {
+  createNode(type, id = null, htmlclass = null) {
     let element = document.createElement(type);
     if (id) {
       element.setAttribute('id', id);
+    }
+    if (htmlclass) {
+      element.setAttribute('class', htmlclass);
     }
     return element;
   }
@@ -10,6 +13,11 @@ class BakeryBuilder {
   addNode(node, afterID) {
     let afterNode = this.getElementById(afterID);
     afterNode.appendChild(node);
+  }
+
+  addAttribute(nodeId, name, initialValue) {
+    let node = this.getElementById(nodeId)
+    node.setAttribute(name, initialValue)
   }
 
   updateText(id, value) {
@@ -21,6 +29,11 @@ class BakeryBuilder {
     }
   }
 
+  getParentId(id) {
+    let child = this.getElementById(id)
+    return child.parentNode.id
+  }
+
 
   getText(id) {
     return this.getElementById(id).value;
@@ -28,7 +41,7 @@ class BakeryBuilder {
 
   updateClick(id, func) {
     this.getElementById(id).addEventListener('click', func)
-    }
+  }
     // .onclick = func;
 
   getElementById(id) {
