@@ -1,6 +1,6 @@
 const http = require('http');
 const mc = require('./mongoConnection');
-const port = 3050;
+const port = 3000;
 
 connection = new mc.mongoConnection('mongodb://localhost:27017/')
 

@@ -12,7 +12,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 class mongoConnection {
   constructor(url, mongo = mongodb) {
     this.mongo = mongo;
-    this.database = process.env.NODE_ENV === 'test' ? 'notes_test' : 'notes';
+    this.database = process.env.NODE_ENV === 'test' ? 'notes_test' : 'MakersBnB';
     this.mongoClient = new this.mongo.MongoClient(url, {
       useNewUrlParser: true
     });
@@ -27,17 +27,14 @@ class mongoConnection {
   }
 
   readCallback(response, collection, data) {
-    console.log(collection, data);
     collection.find(data).toArray().then(results => {
       response.writeHead(200, {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'OPTIONS, POST, GET, PUT, DELETE',
-        'Access-Control-Allow-Headers': '*',
-        'Access-Control-Max-Age': 2592000
+        'Access-Control-Allow-Headers': '*'
       });
-      console.log(results);
-      response.end(JSON.stringify(results));
+      response.send(JSON.stringify(results));
     });
   }
 
