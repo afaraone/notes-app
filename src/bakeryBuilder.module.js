@@ -1,8 +1,11 @@
 class BakeryBuilder {
-  createNode(type, id = null) {
+  createNode(type, id = null, htmlclass = null) {
     let element = document.createElement(type);
     if (id) {
       element.setAttribute('id', id);
+    }
+    if (htmlclass) {
+      element.setAttribute('class', htmlclass);
     }
     return element;
   }
