@@ -7,15 +7,17 @@ class View {
 
   async renderNotes(notes) {
     let noteElement = this.builder.getElementById('view-note-span');
+    let counter = 0
     for (let note of notes) {
       // set names of elements
       let noteId = note._id.toString()
       let noteDivId = 'noteDiv' + noteId
       let noteDeleteId = 'delete' + noteId
       let noteEditId = 'edit' + noteId
+      let noteClass = 'noteClass'
 
       // create div
-      let noteDiv = this.builder.createNode('div', noteDivId)
+      let noteDiv = this.builder.createNode('div', noteDivId, noteClass)
       this.builder.addNode(noteDiv, 'view-note-span');
 
       // create text, edit and delete buttons
@@ -29,9 +31,11 @@ class View {
       this.builder.addNode(noteDelete, noteDivId)
 
       // add text to elements
-      this.builder.updateText(noteId, note.title);
+      this.builder.updateText(noteId, note.title.substring(0, 20));
       this.builder.updateText(noteEditId, "Edit");
       this.builder.updateText(noteDeleteId, "Delete");
+      counter ++
+      if (counter > 200) break
     }
   }
 
@@ -43,20 +47,22 @@ class View {
       })
     }
   }
+
+  createNoteClicked(cb) {
+    var test = this.builder.getText('create-note-text')
+    cb(test)
+  }
+
+    async expander(){
+      this.builder.updateClick('noteDiv1', () => {
+      this.builder.updateText('1', 'hello')
+    });
+  }
 }
 
-let expander = function(){
-    let counter = 0
-    for (let note of notes) {
-    var element = this.builder.createNode('p', note.id);
-    this.builder.addNode(element, 'view-note-span');
-    this.builder.updateText(note.id, note.title.substring(0, 20));
-    counter ++
-    this.builder.updateClick(note.id, () => {
-    this.builder.updateText(note.id, note.title)
-    });
-    if (counter > 7) break
-    }
-}
+
+
+
+
 
 export default View;
