@@ -8,7 +8,7 @@ class View {
   async renderNotes(notes) {
     let noteElement = this.builder.getElementById('view-note-span');
     let counter = 0
-    for (let note of notes) {
+    for (let note of notes.reverse()) {
       // set names of elements
       let noteId = note._id.toString()
       let noteDivId = 'noteDiv' + noteId
@@ -35,7 +35,7 @@ class View {
       this.builder.updateText(noteEditId, "Edit");
       this.builder.updateText(noteDeleteId, "Delete");
       counter ++
-      if (counter > 200) break
+      if (counter > 7) break
     }
   }
 
@@ -45,6 +45,11 @@ class View {
       this.builder.updateClick('create-note-btn', function() {
         self.createNoteClicked(cb);
       })
+    } else if(event == 'deleteButtonClick') {
+      // what id do we put here? maybe a delete class???
+      this.builder.updateClick('???', function() {
+        console.log("delete button clicked")
+      })
     }
   }
 
@@ -53,10 +58,15 @@ class View {
     cb(test)
   }
 
-    async expander(){
-      this.builder.updateClick('noteDiv1', () => {
-      this.builder.updateText('1', 'hello')
+  async expander(){
+    this.builder.updateClick('noteDiv1', () => {
+    this.builder.updateText('1', 'hello')
     });
+  }
+
+  // this should return the parent id (of the individual note div) (bakeryBuilder getParentId)
+  deleteNoteClicked() {
+    console.log("delete button clicked")
   }
 }
 

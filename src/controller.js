@@ -3,6 +3,7 @@ class Controller {
     this.model = model;
     this.view = view;
     this.view.bind('createButtonClick', this.createButtonClicked.bind(this))
+    // this.view.bind('deleteButtonClick', this.deleteButtonClicked.bind(this))
   }
   async initialise() {
     await this.model.loadNotes();
@@ -15,8 +16,12 @@ class Controller {
     setTimeout(() => {
       this.clearBox();
       this.initialise();
-    }, 1000)
+    }, 500)
+  }
 
+  // this will be called in constructor with bind method
+  deleteButtonClicked() {
+    console.log("Delete called in controller")
   }
 
   clearBox() {

@@ -24,6 +24,11 @@ class BakeryBuilder {
     }
   }
 
+  getParentId(id) {
+    let child = this.getElementById(id)
+    return child.parentNode.id
+  }
+
 
   getText(id) {
     return this.getElementById(id).value;
@@ -31,7 +36,7 @@ class BakeryBuilder {
 
   updateClick(id, func) {
     this.getElementById(id).addEventListener('click', func)
-    }
+  }
     // .onclick = func;
 
   getElementById(id) {
