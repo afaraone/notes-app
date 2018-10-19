@@ -22,7 +22,6 @@ export class mongoConnection {
       .find(data)
       .toArray()
       .then( results => {
-        response.writeHead(200, { 'Content-Type': 'application/json' });
         response.end(JSON.stringify(results));
     })
   }
@@ -37,7 +36,6 @@ export class mongoConnection {
       .insertOne(data, (error, results) => {
         if (error) throw error;
         console.log("1 entry added")
-        response.writeHead(201, { 'Content-Type': 'application/json' });
         response.end(JSON.stringify(results));
       })
   }
@@ -51,7 +49,6 @@ export class mongoConnection {
       .updateOne(data[1], {$set: data[0]}, (error, results) => {
         if (error) throw error;
         console.log("1 entry updated")
-        response.writeHead(204, { 'Content-Type': 'application/json' });
         response.end(JSON.stringify(results));
       })
   }
@@ -66,7 +63,6 @@ export class mongoConnection {
       .deleteOne(data, (error, results) => {
         if (error) throw error;
         console.log("1 entry deleted")
-        response.writeHead(204, { 'Content-Type': 'application/json' });
         response.end(JSON.stringify(results));
       })
   }

@@ -1,5 +1,5 @@
-const ALL_NOTES_URL = 'http://0aefe77b.ngrok.io/notes';
-// const ALL_NOTES_URL = 'https://jsonplaceholder.typicode.com/todos';
+const ALL_NOTES_URL = 'http://f012cee7.ngrok.io/notes';
+//const ALL_NOTES_URL = 'https://jsonplaceholder.typicode.com/todos';
 
 class Model {
   constructor(bakersBoy) {
@@ -21,6 +21,14 @@ class Model {
   }
   createNote(noteText) {
     this.bakersBoy.post(ALL_NOTES_URL, {title: noteText})
+  }
+
+  deleteNote(noteId) {
+    this.bakersBoy.delete(ALL_NOTES_URL + `/${noteId}`)
+  }
+
+  editNote(noteId, text) {
+    this.bakersBoy.update(ALL_NOTES_URL + `/${noteId}`, { title: text })
   }
 }
 
