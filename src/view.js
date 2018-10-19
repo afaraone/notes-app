@@ -35,6 +35,15 @@ class View {
       this.builder.updateText(noteEditId, "Edit");
       this.builder.updateText(noteDeleteId, "Delete");
       this.builder.addAttribute(noteId, 'expanded', 1)
+      this.builder.updateClick(noteId, function() {
+        if (document.getElementById(noteId).expanded === 1) {
+          document.getElementById(noteId).innerHTML = note.title
+          document.getElementById(noteId).expanded = -1
+        } else {
+          document.getElementById(noteId).innerHTML = note.title.substring(0,20)
+          document.getElementById(noteId).expanded = 1
+        }
+      })
       counter ++
       if (counter > 7) break
     }
