@@ -21,6 +21,7 @@ class BakeryBuilder {
     }
   }
 
+
   getText(id) {
     return this.getElementById(id).value;
   }
@@ -33,6 +34,7 @@ class BakeryBuilder {
   getElementById(id) {
     return document.getElementById(id);
   }
+
 }
 
 export default BakeryBuilder;
