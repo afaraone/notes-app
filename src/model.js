@@ -22,6 +22,14 @@ class Model {
   createNote(noteText) {
     this.bakersBoy.post(ALL_NOTES_URL, {title: noteText})
   }
+
+  deleteNote(noteId) {
+    this.bakersBoy.delete(ALL_NOTES_URL + `/${noteId}`)
+  }
+
+  editNote(noteId, text) {
+    this.bakersBoy.update(ALL_NOTES_URL + `/${noteId}`, { title: text })
+  }
 }
 
 export default Model;

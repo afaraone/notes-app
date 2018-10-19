@@ -45,11 +45,28 @@ class View {
       this.builder.updateClick('create-note-btn', function() {
         self.createNoteClicked(cb);
       })
-    } else if(event == 'deleteButtonClick') {
+    } else if(event === 'deleteButtonAdd') {
       // what id do we put here? maybe a delete class???
-      this.builder.updateClick('???', function() {
-        console.log("delete button clicked")
-      })
+      let all = document.getElementsByTagName('*')
+      for (let node of all) {
+        if (node.id.includes('delete')) {
+          this.builder.updateClick(node.id, function() {
+              let realId = node.id.substr(6)
+              self.deleteNoteClicked(cb, realId)
+          })
+        }
+      }
+    } else if(event === 'editButtonAdd') {
+      // what id do we put here? maybe a delete class???
+      let all = document.getElementsByTagName('*')
+      for (let node of all) {
+        if (node.id.includes('edit')) {
+          this.builder.updateClick(node.id, function() {
+              let realId = node.id.substr(4)
+              self.editNoteClicked(cb, realId)
+          })
+        }
+      }
     }
   }
 
@@ -65,8 +82,16 @@ class View {
   }
 
   // this should return the parent id (of the individual note div) (bakeryBuilder getParentId)
-  deleteNoteClicked() {
+  deleteNoteClicked(cb, id) {
+    cb(id)
     console.log("delete button clicked")
+  }
+
+  editNoteClicked(cb, id) {
+    let text = this.builder.getText('create-note-text')
+    cb(id, text)
+    console.log("edit button clicked")
+    this.builder.updateText('create-note-text', '')
   }
 }
 

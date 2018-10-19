@@ -32,7 +32,7 @@ class BakersBoy {
       });
   }
 
-  async patch(url, data) {
+  async update(url, data) {
     await fetch(url, {
       method: 'PUT',
       body: JSON.stringify(data),
