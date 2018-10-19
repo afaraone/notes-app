@@ -15,6 +15,11 @@ class BakeryBuilder {
     afterNode.appendChild(node);
   }
 
+  addAttribute(nodeId, name, initialValue) {
+    let node = this.getElementById(nodeId)
+    node.setAttribute(name, initialValue)
+  }
+
   updateText(id, value) {
     let element = this.getElementById(id);
     if (element === null) {

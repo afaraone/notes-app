@@ -10,7 +10,7 @@ class Controller {
     //await this.view.expander();
     this.view.bind('deleteButtonAdd', this.deleteButtonClicked.bind(this))
     this.view.bind('editButtonAdd', this.editButtonClicked.bind(this))
-
+    this.view.bind('nicsButtonAdd', this.nicsButtonClicked.bind(this))
   }
   createButtonClicked(noteText) {
     console.log('Controller button clicked')
@@ -34,6 +34,16 @@ class Controller {
   editButtonClicked(id, text) {
     console.log(`Edit called in controller with id ${id}`)
     this.model.editNote(id, text);
+    setTimeout(() => {
+      this.clearBox();
+      this.initialise();
+      document.getElementById('create-note-text').value = ''
+    }, 500)
+  }
+
+  nicsButtonClicked(id, text) {
+    console.log(`Edit called in controller with id ${id}`)
+    this.model.nicNote(id, text);
     setTimeout(() => {
       this.clearBox();
       this.initialise();

@@ -34,6 +34,7 @@ class View {
       this.builder.updateText(noteId, note.title.substring(0, 20));
       this.builder.updateText(noteEditId, "Edit");
       this.builder.updateText(noteDeleteId, "Delete");
+      this.builder.addAttribute(noteId, 'expanded', 1)
       counter ++
       if (counter > 7) break
     }
@@ -91,7 +92,6 @@ class View {
     let text = this.builder.getText('create-note-text')
     cb(id, text)
     console.log("edit button clicked")
-    this.builder.updateText('create-note-text', '')
   }
 }
 
