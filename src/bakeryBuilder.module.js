@@ -21,6 +21,7 @@ class BakeryBuilder {
     }
   }
 
+
   getText(id) {
     return this.getElementById(id).innerHTML;
   }

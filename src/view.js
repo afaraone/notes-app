@@ -14,9 +14,8 @@ class View {
     this.builder.updateText(note.id, note.title.substring(0, 20));
     counter ++
     this.builder.updateClick(note.id, () => {
-      this.builder.updateText(note.id, note.title)
-    })
-
+    this.builder.updateText(note.id, note.title)
+    });
     if (counter > 7) break
     }
   }
