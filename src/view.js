@@ -1,4 +1,4 @@
-import BakeryBuilder from './bakeryBuilder.module.js';
+import BakeryBuilder from './bakeryBuilder.js';
 
 class View {
   constructor(bakeryBuilder = new BakeryBuilder()) {
