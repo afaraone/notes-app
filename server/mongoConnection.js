@@ -10,12 +10,13 @@ var mongodb = _interopRequireWildcard(require("mongodb"));
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
 class mongoConnection {
-  constructor(url) {
+  constructor(url, mongo = mongodb) {
+    this.mongo = mongo;
     this.database = process.env.NODE_ENV === 'test' ? 'notes_test' : 'notes';
-    this.mongoClient = new mongodb.MongoClient(url, {
+    this.mongoClient = new this.mongo.MongoClient(url, {
       useNewUrlParser: true
     });
-    this.objectId = mongodb.ObjectId;
+    this.objectId = this.mongo.ObjectId;
   }
 
   connect(response, collectionName, callback, data) {
@@ -27,9 +28,6 @@ class mongoConnection {
 
   readCallback(response, collection, data) {
     collection.find(data).toArray().then(results => {
-      response.writeHead(200, {
-        'Content-Type': 'application/json'
-      });
       response.end(JSON.stringify(results));
     });
   }
@@ -45,15 +43,11 @@ class mongoConnection {
     collection.insertOne(data, (error, results) => {
       if (error) throw error;
       console.log("1 entry added");
-      response.writeHead(201, {
-        'Content-Type': 'application/json'
-      });
       response.end(JSON.stringify(results));
     });
   }
 
   post(response, collectionName, data) {
-    encryptPassword(data)
     this.connect(response, collectionName, this.postCallback, data);
   }
 
@@ -63,9 +57,6 @@ class mongoConnection {
     }, (error, results) => {
       if (error) throw error;
       console.log("1 entry updated");
-      response.writeHead(204, {
-        'Content-Type': 'application/json'
-      });
       response.end(JSON.stringify(results));
     });
   }
@@ -81,9 +72,6 @@ class mongoConnection {
     collection.deleteOne(data, (error, results) => {
       if (error) throw error;
       console.log("1 entry deleted");
-      response.writeHead(204, {
-        'Content-Type': 'application/json'
-      });
       response.end(JSON.stringify(results));
     });
   }

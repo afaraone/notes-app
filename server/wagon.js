@@ -8,6 +8,13 @@ const requestHandler = (req, res) => {
   if (req.url === '/favicon.ico') {
     return
   }
+
+  res.writeHead(200, {'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'OPTIONS, POST, GET, PUT, DELETE',
+    'Access-Control-Allow-Headers': '*'
+  })
+
   collection = req.url.split('/')[1]
   id = req.url.split('/')[2]
 
@@ -30,9 +37,11 @@ const requestHandler = (req, res) => {
     })
   } else if (req.method === 'DELETE') {
     connection.delete(res, collection, id)
+  } else if (req.method === 'OPTIONS' ){
+    res.end()
   } else {
-    response.writeHead(404, { 'Content-Type': 'application/json' });
-    response.end(JSON.stringify(null));
+    res.writeHead(404, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify(null));
   }
 };
 
